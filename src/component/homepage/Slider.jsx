@@ -9,7 +9,7 @@ function Slider() {
       >
         <div className="hs-carousel relative overflow-hidden w-full xs:min-h-40 sm:min-h-52 md:min-h-64 lg:min-h-80 xl:min-h-96 min-h-32 bg-slate-400 rounded-lg mx-auto">
           <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-            <div className="hs-carousel-slide w-[100vw]">
+            <div className="hs-carousel-slide">
               <img src={imgs.slider1} className="block w-full" />
             </div>
             <div className="hs-carousel-slide">
