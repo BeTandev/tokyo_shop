@@ -1,22 +1,49 @@
 import { useState } from "react";
+import _ from "lodash";
+import 'react-toastify/dist/ReactToastify.css';
+import Notice from "../Notice";
 
 function InfoProduct(props) {
-
-  const { dataProduct } = props;
-  const [amount, setAmount] = useState(1)
+  const { dataProduct, setChangeData } = props;
+  const [amount, setAmount] = useState(1);
+  const [showNotice, setShowNotice] = useState(false)
 
   const handleAddProduct = () => {
-    const getData = localStorage.getItem("productSelected")
-    if(getData){
-        const dataJson = JSON.parse(getData)
-        const dataPrepare = dataJson.concat(dataProduct)
-        localStorage.setItem("productSelected", JSON.stringify(dataPrepare))
+    const getData = localStorage.getItem("productSelected");
+    if (getData) {
+      const dataJson = JSON.parse(getData);
+      Object.assign(dataProduct[0], { amount: Number(amount) });
+
+      let checkArray = true
+      _.find(dataJson, function (obj) {
+        if (obj.id === dataProduct[0].id) {
+          _.update(dataProduct[0], 'amount', function (n) {
+            return obj.amount + Number(n)
+          })
+          return checkArray = true
+        } else {
+          return checkArray = false
+        }
+      })
+
+      if (checkArray) {
+        const dataAfterFil = dataJson.filter(item => item.id !== dataProduct[0].id)
+        const dataPrepare = dataAfterFil.concat(dataProduct);
+        localStorage.setItem("productSelected", JSON.stringify(dataPrepare));
+      } else {
+        const dataPrepare = dataJson.concat(dataProduct);
+        localStorage.setItem("productSelected", JSON.stringify(dataPrepare));
+      }
     } else {
-        let data = []
-        const dataPrepare = data.concat(dataProduct)
-        localStorage.setItem("productSelected", JSON.stringify(dataPrepare))
+      let data = [];
+      Object.assign(dataProduct[0], { amount: Number(amount) });
+      const dataPrepare = data.concat(dataProduct);
+      localStorage.setItem("productSelected", JSON.stringify(dataPrepare));
     }
-  }
+
+    setChangeData(true)
+    setShowNotice(true)
+  };
 
   return (
     <div className="basis-2/5">
@@ -45,14 +72,17 @@ function InfoProduct(props) {
         </label>
         <input
           type="number"
-          className="border border-main-brown focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none py-1 px-3 "
+          className="border border-main-brown focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none py-1 px-3"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
       </div>
       <div className="flex flex-col xs:flex-row  mt-6 gap-3">
         {dataProduct && dataProduct[0].price !== null ? (
-          <button onClick={handleAddProduct} className="flex items-center gap-2 bg-orange-400 text-white py-2 px-6 justify-center">
+          <button
+            onClick={handleAddProduct}
+            className="flex items-center gap-2 bg-orange-400 text-white py-2 px-6 justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -68,7 +98,7 @@ function InfoProduct(props) {
               />
             </svg>
 
-            <span>Mua hàng</span>
+            <span>Thêm vào giỏ hàng</span>
           </button>
         ) : (
           ""
@@ -78,6 +108,7 @@ function InfoProduct(props) {
         </button>
       </div>
       <hr className="bg-main-brown mt-4" />
+      <Notice showNotice={showNotice} setShowNotice={setShowNotice} content="Đã đặt hàng thành công"/>
     </div>
   );
 }

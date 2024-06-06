@@ -22,7 +22,7 @@ function ShowComment(props) {
           className="rounded-full block w-16 h-16"
         />
         <div className="text-sm">
-          <div className="">{item.name}</div>
+          <div className="text-base font-semibold">{item.name}</div>
           <div className="">{item.comment}</div>
         </div>
       </div>)}

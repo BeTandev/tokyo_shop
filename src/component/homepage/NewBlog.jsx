@@ -11,8 +11,8 @@ function NewBlog() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-4">
           {blogData.slice(0, 3).map((item, index) => (
             <div key={index} className="basis-1/3">
-              <Link to={'/'} className=""><img src={item.image} alt="" className="w-full" /></Link>
-              <div className="text-lg text-main-brown mt-2"><Link to={'/'}>{item.title}</Link></div>
+              <Link to={`${item.link}`} className=""><img src={`.${item.image}`} alt="" className="w-full" /></Link>
+              <div className="text-lg text-main-brown mt-2"><Link to={`${item.link}`}>{item.title}</Link></div>
               <div className="flex text-slate-400 text-xs">
                 <div className="">{item.date}</div>
                 <div className="">- Đăng bởi {item.author}</div>

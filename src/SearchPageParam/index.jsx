@@ -1,28 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import TitlePage from "../component/TitlePage";
 import { menuData } from "../mockData/menuData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { allProduct } from "../mockData/allProduct";
 import { removeAccents } from "../helper/removeAccents";
 import ProductItem from "../component/ProductItem";
 import Pagination from "../component/AllProductComponent/Pagination"
 
-function SearcghPage() {
+function SearcghPageParam() {
   const [searchKey, setSearchkey] = useState("");
   const [dataFinal, setDataFinal] = useState([]);
   const [selectPage, setSelectPage] = useState(1)
-
-  console.log(dataFinal)
+  const navigate = useNavigate()
+  const {key} = useParams()
 
   const handleSubmit = () => {
-    const dataAfter = removeAccents(searchKey).toLocaleLowerCase();
+    navigate(`/tim-kiem/${searchKey}`)
+  };
+
+  useEffect(() => {
+    setSearchkey(key)
+    const dataAfter = removeAccents(key).toLocaleLowerCase();
     const dataFilted = allProduct.filter((item) =>
       removeAccents(item.title).toLocaleLowerCase().includes(dataAfter)
     );
     setDataFinal(dataFilted);
-  };
+  }, [key])
 
   return (
     <div>
@@ -50,7 +55,7 @@ function SearcghPage() {
             </div>
             <div className="basis-3/4">
               <div className="mb-3">
-                Kết quả tìm kiếm với từ khóa &quot;{searchKey}&quot;:
+                Kết quả tìm kiếm với từ khóa &quot;{key}&quot;:
               </div>
               <div className="flex gap-10">
                 <input
@@ -83,4 +88,4 @@ function SearcghPage() {
   );
 }
 
-export default SearcghPage;
+export default SearcghPageParam;

@@ -3,6 +3,8 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { useState } from "react";
 import TitlePage from "../component/TitlePage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LayLaiMatKhau() {
   const navigate = useNavigate();
@@ -14,7 +16,18 @@ function LayLaiMatKhau() {
     if (email.length < 1) {
       setNotice("Không được bỏ trống email");
     } else {
-      navigate("/");
+      toast.success('Đã gửi thông tin thành công', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      setTimeout(() => { navigate("/"); }, 2000);
     }
   };
 
@@ -23,12 +36,12 @@ function LayLaiMatKhau() {
       <Header />
       <div className="container mx-auto">
         <div className="row w-[95%] xs:w-[90%] mx-auto">
-          <TitlePage title="Lây lại mật khẩu"/>
+          <TitlePage title="Lây lại mật khẩu" />
         </div>
       </div>
       <div className="mx-auto bg-grey-bg py-14 max-w-[700px] mt-5">
         <div className="uppercase text-4xl text-main-brown text-center">
-            Lây lại mật khẩu
+          lấy lại mật khẩu
         </div>
         <div className="text-center text-main-brown w-[95%] xs:w-[90%] mx-auto text-sm">Chúng tôi sẽ gủi email kích hoạt việc lấy lại mật khẩu.</div>
         <div className="mt-5">
@@ -52,7 +65,7 @@ function LayLaiMatKhau() {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-5 mx-auto w-[80%] justify-between mt-5 text-main-brown">
-          <Link to={"/DangNhap"} className="">
+          <Link to={"/dang-nhap"} className="">
             Quay lại
           </Link>
         </div>
@@ -64,6 +77,7 @@ function LayLaiMatKhau() {
           Gửi
         </button>
       </div>
+      <ToastContainer />
       <Footer />
     </div>
   );

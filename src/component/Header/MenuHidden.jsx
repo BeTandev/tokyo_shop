@@ -53,9 +53,9 @@ function MenuHidden() {
       </div>
 
       <div className={`mt-5 flex-col gap-2 ${isShowMenu ? "flex" : "hidden"} text-sm roboto-regular`}>
-        <div className="uppercase text-base">Trang chủ</div>
+        <Link to={'/'} className="uppercase text-base">Trang chủ</Link>
         <hr className="bg-main-brown" />
-        <div className="uppercase text-base">Giới thiệu</div>
+        <Link to={'/ve-chung-toi'} className="uppercase text-base">Giới thiệu</Link>
         <hr className="bg-main-brown" />
         <div className="relative">
           <div className="uppercase text-base cursor-pointer" onClick={handleClick}>
@@ -71,8 +71,7 @@ function MenuHidden() {
                 <div key={index}>
                   <li>
                     <Link
-                      to={`${item.link}`}
-                      href="#"
+                      to={`/tat-ca-san-pham`}
                       className="block py-3 text-main-brown hover:text-orange-500 transition-all duration-500 hover:ml-3 dark:hover:bg-gray-600 dark:hover:text-white text-base"
                     >
                       {item.title}
@@ -84,7 +83,7 @@ function MenuHidden() {
             </ul>
         </div>
         <hr className="bg-main-brown" />
-        <div className="uppercase text-base">Blog</div>
+        <Link to={'/blog'} className="uppercase text-base">Blog</Link>
       </div>
     </div>
   );

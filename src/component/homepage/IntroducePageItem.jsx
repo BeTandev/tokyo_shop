@@ -7,7 +7,7 @@ function IntroducePageItem(props) {
     return (
         <div className="flex items-center">
           <div className="md:basis-5/12 basis-6/12">
-            <img src={`${image}`} alt="" className="h-[250px] object-cover"/>
+            <img src={`.${image}`} alt="" className="h-[250px] object-cover"/>
           </div>
           <div className="md:basis-7/12 basis-6/12 ml-5">
             <h2 className="text-2xl roboto-medium text-main-brown"><Link to={`${link}`}>{title}</Link></h2>

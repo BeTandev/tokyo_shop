@@ -9,13 +9,14 @@ function DangNhap() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [notice, setNotice] = useState("");
+  const [errEmail, setErrEmail] = useState("")
+  const [errPassword, setErrPassword] = useState("")
 
   const handleSubmit = () => {
     if (email.length < 1) {
-      setNotice("Không được bỏ trống email");
+      setErrEmail("Không được bỏ trống email");
     } else if (password < 1) {
-      setNotice("Không được bỏ trống password");
+      setErrPassword("Không được bỏ trống password");
     } else {
       navigate("/");
     }
@@ -26,7 +27,7 @@ function DangNhap() {
       <Header />
       <div className="container mx-auto">
         <div className="row w-[95%] xs:w-[90%] mx-auto">
-          <TitlePage title="Đăng nhập"/>
+          <TitlePage title="Đăng nhập" />
         </div>
       </div>
       <div className="mx-auto bg-grey-bg py-14 max-w-[700px] mt-5">
@@ -34,11 +35,6 @@ function DangNhap() {
           Đăng nhập
         </div>
         <div className="mt-5">
-          {notice.length > 0 ? (
-            <div className="text-center text-red-500">{notice}</div>
-          ) : (
-            ""
-          )}
           <div className="w-[80%] mx-auto mt-5">
             <input
               type="email"
@@ -47,10 +43,15 @@ function DangNhap() {
                 setEmail(e.target.value);
               }}
               onClick={() => {
-                setNotice(" ");
+                setErrEmail(" ");
               }}
               placeholder="Email"
             />
+            {errEmail.length > 0 ? (
+              <div className="text-center text-red-500 translate-y-2.5">{errEmail}</div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="mt-5 w-[80%] mx-auto">
             <input
@@ -62,19 +63,24 @@ function DangNhap() {
                 setPassword(e.target.value);
               }}
               onClick={() => {
-                setNotice(" ");
+                setErrPassword(" ");
               }}
-              placeholder="Password"
+              placeholder="Mật khẩu"
             />
+            {errPassword.length > 0 ? (
+              <div className="text-center text-red-500 translate-y-2.5">{errPassword}</div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-5 mx-auto w-[80%] justify-between mt-5">
-          <Link to={"/"} className="">
+          <Link to={"/lay-lai-mat-khau"} className="text-green-600">
             Quên mật khẩu
           </Link>
           <div className="text-main-brown">
             <span>Bạn chưa có tài khoản ? </span>
-            <Link to={"/"} className="hover:underline">
+            <Link to={"/dang-ky"} className="hover:underline text-blue-500">
               Đăng ký ngay
             </Link>
           </div>

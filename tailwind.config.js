@@ -1,15 +1,23 @@
-import prelinePlugin from 'preline/plugin';
-
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "node_modules/preline/dist/*.js',"],
+import withMT from '@material-tailwind/react/utils/withMT';
+
+
+export default withMT({
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screen: {
+      'xs': '480px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+    },
     extend: {
-      screens: {
-        xs: "480px",
+      screen:{
+        'xs': '480px'
       },
       fontSize:{
-        xs: "12px",
+        'xs': "12px",
       },
       colors: {
         "main-brown": "#867566",
@@ -20,7 +28,5 @@ export default {
       },
     },
   },
-  plugins: [
-    prelinePlugin
-  ],
-};
+  plugins: [],
+});

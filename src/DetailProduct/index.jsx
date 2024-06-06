@@ -13,6 +13,7 @@ function DetailProduct() {
   const { slug } = useParams();
   const [dataProduct, setDataProduct] = useState()
   const [selectInfo, setSelectInfo] = useState(0)
+  const [changeData, setChangeData] = useState(false)
 
   useEffect(() => {
     const dataFilted = allProduct.filter(item => item.slug === slug)
@@ -22,24 +23,24 @@ function DetailProduct() {
 
   return (
     <div>
-      <Header />
+      <Header changeData={changeData} setChangeData={setChangeData}/>
       <div className="container mx-auto">
         <div className="row w-[95%] xs:w-[90%] mx-auto">
           {dataProduct && <TitlePage title={dataProduct[0].title} />}
           <div className="flex flex-col lg:flex-row gap-5 mt-10">
             <div className="basis-3/5 flex gap-4">
               <div className="">
-                {dataProduct && <img src={dataProduct[0]?.image} alt="" className="w-20 h-20" />}
+                {dataProduct && <img src={`.${dataProduct[0]?.image}`} alt="" className="w-20 h-20 object-contain" />}
               </div>
               <div className="">
                 {dataProduct && <img
-                  src={dataProduct[0]?.image}
+                  src={`.${dataProduct[0]?.image}`}
                   alt=""
                   className="max-h-[500px]"
                 />}
               </div>
             </div>
-            <InfoProduct dataProduct={dataProduct}/>
+            <InfoProduct changeData={changeData} setChangeData={setChangeData} dataProduct={dataProduct}/>
           </div>
           <div className="flex uppercase text-lg gap-3 items-center mt-5">
             <div className={`tracking-wider cursor-pointer ${selectInfo === 0 ? "before:content-[' '] before:bg-black before:w-full before:h-[1px] relative before:absolute before:bottom-[-10px]": ""}`} onClick={() => setSelectInfo(0)}>Mô tả sản phẩm</div>

@@ -15,7 +15,7 @@ function IntroduceTea() {
           </div>
         </div>
         <div className="basis-full md:basis-2/5 w-full">
-          <img src={imgs.tra_dao} alt="" className="w-full"/>
+          <img src={`.${imgs.tra_dao}`} alt="" className="w-full"/>
         </div>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import logo from './logo.png'
 import slider1 from "./slider-1.png"
 import slider2 from "./slider-2.png"
 import tra_dao from "./home_banner_1.jpg"
@@ -22,5 +21,6 @@ import aboutme from "./aboutme.png"
 import tra_ahmad_dau from "./tra_ahmad_dau.png"
 import bo_tra_su_trang from "./Bo_tra_su_trang.png"
 import avatarComment from "./avatarComment.png"
+import head from "./head.jpg"
 
-export default {logo, slider1, slider2, tra_dao, IntroducePage1, IntroducePage2, IntroducePage3, IntroducePage4, tra_gao_rang, middle_banner, blog3, blog2, blog1, tra_moc_cau, tra_No1_Anh_Quoc_Bau_Duc, tra_non_tom, tra_olong_hoa_viet_hop_go, tra_sao_nhat_ban, tra_thiet_quan_am, tra_uop_hoa_moc, aboutme, tra_ahmad_dau, bo_tra_su_trang, avatarComment}
+export default {head, slider1, slider2, tra_dao, IntroducePage1, IntroducePage2, IntroducePage3, IntroducePage4, tra_gao_rang, middle_banner, blog3, blog2, blog1, tra_moc_cau, tra_No1_Anh_Quoc_Bau_Duc, tra_non_tom, tra_olong_hoa_viet_hop_go, tra_sao_nhat_ban, tra_thiet_quan_am, tra_uop_hoa_moc, aboutme, tra_ahmad_dau, bo_tra_su_trang, avatarComment}

@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { menuData } from "../../mockData/menuData";
 
-function DropDownHeader() {
+function DropDownHeader(props) {
+
+  const {pageSelected, setPageSelected} = props
+
   const navigate = useNavigate();
   const [hoverMenu, setHoverMenu] = useState(false);
 
@@ -15,13 +18,14 @@ function DropDownHeader() {
   };
 
   const handleTrans = () => {
-    navigate("/");
+    navigate("/tat-ca-san-pham");
+    setPageSelected(2)
   };
 
   return (
     <div className="flex-col relative items-center gap-1" onClick={handleTrans}>
       <button
-        className="focus:outline-none rounded-lg text-center inline-flex items-center hover:text-orange-400 md:text-base lg:text-lg"
+        className={`${pageSelected === 2 ? "text-orange-500" : "text-main-brown"} focus:outline-none rounded-lg text-center inline-flex items-center hover:text-orange-400 md:text-base lg:text-lg`}
         type="button"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -48,7 +52,7 @@ function DropDownHeader() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className={`z-10 ${
-          hoverMenu ? "visible" : "invisible"
+          hoverMenu ? "visible" : "invisible hidden"
         } bg-white divide-y divide-gray-100 rounded-lg absolute shadow w-56 dark:bg-gray-700`}
       >
         <ul className="py-3 px-6 text-gray-700 dark:text-gray-200 roboto-regular text-base">
@@ -56,8 +60,7 @@ function DropDownHeader() {
             <div key={index}>
               <li>
                 <Link
-                  to={`${item.link}`}
-                  href="#"
+                  to={'/tat-ca-san-pham'}
                   className="block py-3 text-main-brown hover:text-orange-500 transition-all duration-300 hover:ml-3 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   {item.title}

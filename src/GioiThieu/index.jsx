@@ -13,7 +13,7 @@ function GioiThieu() {
                     <h2 className="text-3xl text-main-brown mt-8">Giới thiệu</h2>
                     <hr className="mt-3 bg-main-brown"/>
                     <div className="flex flex-col md:flex-row mt-5 gap-5 items-start lg:items-center">
-                        <div className="min-w-[300px] max-w-[300px] min-h-[450px] max-h-[450px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${imgs.aboutme})` }}></div>
+                        <div className="min-w-[300px] max-w-[300px] min-h-[450px] max-h-[450px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(.${imgs.aboutme})` }}></div>
                         <div className="text-sm text-main-brown">
                             <div className="">Đã từ lâu trà không chỉ là một thứ đồ uống thông thường mà còn được coi như một nét văn hóa . Trà dùng để uống và thưởng thức các hương vị đặc biệt, trà dùng để làm những món quà biếu tặng đầy ý nghĩa ...</div>
                             <div className="mt-3 tracking-wide">Tokyoshop là một trong những cửa hàng đầu tiên chuyên bán và cung cấp các sản phẩm trà nổi tiếng của tỉnh Phúc Kiến - Trung Quốc và các sản phẩm trà Đài Loan. Chúng tôi đã được cấp chứng chỉ xác nhận đại lý của các thương hiệu trà nổi tiếng.</div>

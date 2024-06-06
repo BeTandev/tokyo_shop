@@ -11,37 +11,53 @@ function AllProduct() {
   const [selectPage, setSelectPage] = useState(1)
   const [category, setCategory] = useState('')
   const [dataFinal, setDataFinal] = useState([])
-  const [sortKey, setSortkey] = useState('')
-  
+  const [sortKey, setSortkey] = useState("")
+  const [selectedCategory, setSelectedcategory] = useState(null)
+
   useEffect(() => {
     setDataFinal(allProduct)
 
-    if(category){
-        const dataAfterFil = allProduct.filter(item => item.category === category)
-        setDataFinal(dataAfterFil)
-    } else if(category === ''){
-        setDataFinal(allProduct)
+    if (category) {
+      const dataAfterFil = allProduct.filter(item => item.category === category)
+      setDataFinal(dataAfterFil)
+    } else if (category === '') {
+      setDataFinal(allProduct)
     }
 
   }, [category])
 
   useEffect(() => {
-    if(sortKey === 'priceAsc'){
-        const dataAfterFil = dataFinal.sort((a, b) => b.price - a.price);
-        setDataFinal(dataAfterFil)
-    } else if(sortKey === 'priceDesc'){
-        const dataAfterFil = dataFinal.sort((a, b) => a.price - b.price);
-        setDataFinal(dataAfterFil)
-    } else if(sortKey === 'nameAsc'){
-        const dataAfterFil = dataFinal.sort((a, b) => (a.title && b.title) ? b.title.localeCompare(a.title) : 0);
-        setDataFinal(dataAfterFil)
-    } else if(sortKey === 'nameDesc'){
-        const dataAfterFil = dataFinal.sort((a, b) => (a.title && b.title) ? a.title.localeCompare(b.title) : 0);
-        setDataFinal(dataAfterFil)
+    if (sortKey === "") {
+      setDataFinal(allProduct);
     } else {
-        setSortkey("")
+      const sortedData = [...dataFinal];
+
+      if (sortKey === 'priceAsc') {
+        sortedData.sort((a, b) => {
+          if (a.price === null) return 1;
+          if (b.price === null) return -1;
+          return a.price - b.price;
+        });
+      } else if (sortKey === 'priceDesc') {
+        sortedData.sort((a, b) => {
+          if (a.price === null) return 1;
+          if (b.price === null) return -1;
+          return b.price - a.price;
+        });
+      } else if (sortKey === 'nameAsc') {
+        sortedData.sort((a, b) => (a.title && b.title) ? a.title.localeCompare(b.title) : 0);
+      } else if (sortKey === 'nameDesc') {
+        sortedData.sort((a, b) => (a.title && b.title) ? b.title.localeCompare(a.title) : 0);
+      }
+
+      setDataFinal(sortedData);
     }
-  }, [sortKey])
+  }, [sortKey]);
+
+  const selectCategory = (x, y) => {
+    setCategory(x)
+    setSelectedcategory(y)
+  }
 
   return (
     <div>
@@ -51,12 +67,12 @@ function AllProduct() {
           <TitlePage title="Sản phẩm" />
           <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-start lg:items-center">
             <div className="flex gap-3 items-center mt-5 text-main-brown flex-wrap">
-              <h2 className="text-2xl cursor-pointer" onClick={() => setCategory('')}>Tất cả sản phẩm</h2>
+              <h2 className={`cursor-pointer text-2xl ${selectedCategory === 0 ? "text-orange-500" : "text-main-brown"}`} onClick={() => selectCategory("", 0)}>Tất cả sản phẩm</h2>
               <hr className="h-[40px] w-[1px] bg-main-brown" />
-              <div className="cursor-pointer" onClick={() => setCategory("tra-kho")}>Trà Khô</div>
-              <div className="cursor-pointer" onClick={() => setCategory("tra-uop")}>Trà Ướp</div>
-              <div className="cursor-pointer" onClick={() => setCategory("tra-hop")}>Trà Hộp</div>
-              <div className="cursor-pointer" onClick={() => setCategory("bo-am")}>Bộ Ấm</div>
+              <p className={`cursor-pointer ${selectedCategory === 1 ? "text-orange-500" : "text-main-brown"}`} onClick={() => selectCategory("tra-kho", 1)}>Trà Khô</p>
+              <p className={`cursor-pointer ${selectedCategory === 2 ? "text-orange-500" : "text-main-brown"}`} onClick={() => selectCategory("tra-uop", 2)}>Trà Ướp</p>
+              <p className={`cursor-pointer ${selectedCategory === 3 ? "text-orange-500" : "text-main-brown"}`} onClick={() => selectCategory("tra-hop", 3)}>Trà Hộp</p>
+              <p className={`cursor-pointer ${selectedCategory === 4 ? "text-orange-500" : "text-main-brown"}`} onClick={() => selectCategory("bo-am", 4)}>Bộ Ấm</p>
             </div>
             <div className="flex items-center gap-3">
               <label htmlFor="">Sắp xếp: </label>
@@ -79,7 +95,7 @@ function AllProduct() {
             ))}
           </div>
 
-          <Pagination setSelectPage={setSelectPage} selectPage={selectPage} dataFinal={dataFinal} itemPerPage={8}/>
+          <Pagination setSelectPage={setSelectPage} selectPage={selectPage} dataFinal={dataFinal} itemPerPage={8} />
         </div>
       </div>
       <Footer />

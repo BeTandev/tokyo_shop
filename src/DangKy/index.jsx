@@ -3,6 +3,8 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { useState } from "react";
 import TitlePage from "../component/TitlePage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function DangKy() {
   const navigate = useNavigate();
@@ -23,7 +25,18 @@ function DangKy() {
     } else if (password < 1) {
       setNotice("Không được bỏ trống password");
     } else {
-      navigate("/");
+      toast.success('Đã đăng ký thành công', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      setTimeout(() => { navigate("/"); }, 2000);
     }
   };
 
@@ -32,7 +45,7 @@ function DangKy() {
       <Header />
       <div className="container mx-auto">
         <div className="row w-[95%] xs:w-[90%] mx-auto">
-          <TitlePage title="Tạo tài khoản"/>
+          <TitlePage title="Đăng ký"/>
         </div>
       </div>
       <div className="mx-auto bg-grey-bg py-14 max-w-[700px] mt-5">
@@ -94,14 +107,14 @@ function DangKy() {
               onClick={() => {
                 setNotice(" ");
               }}
-              placeholder="Password"
+              placeholder="Mật khẩu"
             />
           </div>
         </div>
         <div className="flex flex-col md:flex-row mx-auto w-[80%] mt-5">
           <div className="text-main-brown">
             <span>Bạn đâ có tài khoản ? </span>
-            <Link to={"/"} className=" hover:underline">Đăng nhập</Link>
+            <Link to={"/dang-nhap"} className="hover:underline text-blue-500">Đăng nhập</Link>
           </div>
         </div>
         <button
@@ -112,6 +125,7 @@ function DangKy() {
           Đăng Ký
         </button>
       </div>
+      <ToastContainer />
       <Footer />
     </div>
   );

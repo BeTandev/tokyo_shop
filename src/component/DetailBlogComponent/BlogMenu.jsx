@@ -6,7 +6,7 @@ function BlogMenu(props) {
   const {slug, title} = props
 
   return (
-    <div className="basis-2/5">
+    <div className="basis-1/4">
       <h3 className="text-2xl text-main-brown">Bài viết khác</h3>
       <hr className=" text-main-brown mt-3" />
       {blogData.slice(0, 3).map((item, index) => (
@@ -28,7 +28,7 @@ function BlogMenu(props) {
               d="m8.25 4.5 7.5 7.5-7.5 7.5"
             />
           </svg>
-          <Link to={`${item.link}`} className="text-base">
+          <Link to={`${item.link.startsWith('/') ? '' : '/'}${item.link}`} className="text-base">
             {item.title}
           </Link>
         </div>
